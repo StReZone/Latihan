@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Contac;
+use App\Contact;
 
 class staticController extends Controller
 {
@@ -18,7 +18,7 @@ class staticController extends Controller
     }
     public function Store(Request $request)
     {
-        $contact = new Contac();
+        $contact = new Contact();
         $data=$this->validate($request,[
             'email'=>'required',
             'comment'=>'required'

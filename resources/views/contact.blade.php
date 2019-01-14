@@ -1,7 +1,15 @@
 @extends('template.template')
 
 @section('content')
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div><br />
+@endif
 <div class="col-md-4 col-md-offset-1">
     <h1 > RUBENSON C SILABAN</h1>
     <img class="img-circle" src="pic/profile.jpg" alt="Avatar"style="width:80px">
@@ -17,7 +25,7 @@
             <input type="text" id="email"name="email"class="form-control"><br><br>
         <div class="form-group"></div>
         <div class="form-group"></div>
-            <textarea form="myF" id="area" name="area" rows="4" cols="50"class="form-control"></textarea><br><br>
+            <input text  id="comment" name="comment" class="form-control"><br><br>
         <div class="form-group"></div>
         <input type="submit" name="submit"class="btn btn-success">
     </form>
