@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use AppArticle;
 class articlesController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class articlesController extends Controller
     public function index()
     {
         //
-        
+        $article = Article::all();
+        return view('articles.index')->with('articles',$articles);
     }
     public function about()
     {
@@ -30,6 +31,7 @@ class articlesController extends Controller
     public function create()
     {
         //
+        return view('articles.create');
     }
 
     /**
@@ -41,6 +43,10 @@ class articlesController extends Controller
     public function store(Request $request)
     {
         //
+        Articles::create($request->all());
+        Session::flas("notice","Article success created");
+        return redirect()->route("articles.index");
+        
     }
 
     /**
@@ -52,6 +58,8 @@ class articlesController extends Controller
     public function show($id)
     {
         //
+        $article = Article::find($id);
+        return view("articles.show")->with('article',$article);
     }
 
     /**
@@ -63,6 +71,8 @@ class articlesController extends Controller
     public function edit($id)
     {
         //
+        $article = Article::find($id);
+        return view('articles.edit')->with('article',$article);
     }
 
     /**
@@ -75,6 +85,9 @@ class articlesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        Article::find($id)->update($request->all());
+        Session::flash("notice","Article success updated");
+        return redirect()->route("articles.show",$id);
     }
 
     /**
@@ -86,5 +99,8 @@ class articlesController extends Controller
     public function destroy($id)
     {
         //
+        Article::destroy($id);
+        Session::flash("notice","Article success deleted");
+        return redirect()->route("articles.index");
     }
 }
