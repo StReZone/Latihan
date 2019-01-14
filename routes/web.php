@@ -15,16 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/Home', function () {
-    return view('home');
-});
-Route::get('/Profile', function () {
-    return view('profile');
-});
-Route::get('/Contact', function () {
-    return view('contact');
-});
-
-//Route::get('/About', 'ArticlesController');
-
+Route::get('/Home','staticController@Home');
+Route::get('/Profile','staticController@Profile');
+Route::get('/Contact','staticController@Contact');
 
