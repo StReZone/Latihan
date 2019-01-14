@@ -19,7 +19,7 @@ class articlesController extends Controller
     public function about()
     {
         //
-        return view('about');
+       
     }
 
     /**
@@ -30,6 +30,7 @@ class articlesController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**

@@ -10,7 +10,7 @@
     <a>message</a>
 </div>
 <div class="col-md-2">
-    <form name="myF" action="contact.htm" onsubmit="return validateForm()" method="post">
+    <form name="myF" action="contact.htm" onsubmit="" method="post">
         <div class="form-group"></div>
             <input type="text" id="email"name="email"class="form-control"><br><br>
         <div class="form-group"></div>
