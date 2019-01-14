@@ -14,6 +14,11 @@ class articlesController extends Controller
     public function index()
     {
         //
+        
+    }
+    public function about()
+    {
+        //
         return view('about');
     }
 
