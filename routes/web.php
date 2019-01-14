@@ -17,4 +17,7 @@ Route::get('/', function () {
 
 Route::get('/Home','staticController@Home');
 Route::get('/Profile','staticController@Profile');
+Route::get('/Profile','staticController@Profile');
 Route::get('/Contact','staticController@Contact');
+Route::post('/Contact','staticController@Store');
+Route::get('/About','staticController@About');
