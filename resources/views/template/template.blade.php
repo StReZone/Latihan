@@ -8,15 +8,12 @@
 <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
 <title>Laravel 5 </title>
 </head>
-    @include('komponen.navbar');
-<body>
-    <section>
-    <div class="container clearfix">
-        <div class="row row-offcanvas row-offcanvas-left ">
-            <!--Bagian Kiri-->
-             @include("komponen.left_nav")
-            <!--Bagian Kanan-->
-             <div class="row">
+<body style="padding-top:30px;">
+@include('komponen.navbar');
+<section>
+<div class="container clearfix">
+    <div class="row row-offcanvas row-offcanvas-left ">
+             @include("komponen.left_nav")          
 <div id="main-content" class="col-xs-12 col-sm-9 main pullright">
     <div class="panel-body">
     @if (Session::has('error'))
@@ -32,6 +29,7 @@
      @yield('content')
     </div>
 </div>
+
     </section>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
