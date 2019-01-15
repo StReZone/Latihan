@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use AppArticle;
+use App\Article;
+use Session;
 class articlesController extends Controller
 {
     /**
@@ -14,14 +15,10 @@ class articlesController extends Controller
     public function index()
     {
         //
-        $article = Article::all();
-        return view('articles.index')->with('articles',$articles);
+        $articles = Article::all();
+        return view('articles.index')->with('articles',$articles);   
     }
-    public function about()
-    {
-        //
-        return view('about');
-    }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -43,10 +40,10 @@ class articlesController extends Controller
     public function store(Request $request)
     {
         //
-        Articles::create($request->all());
-        Session::flas("notice","Article success created");
+        Article::create($request->all());
+        Session::flash("notice","Article success created");
         return redirect()->route("articles.index");
-        
+       
     }
 
     /**
