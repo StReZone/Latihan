@@ -17,9 +17,5 @@ Route::get('/', function () {
 Route::resource('articles','articlesController');
 //Route::get('/Home','staticController@Home');
 Route::get('/profile','staticController@Profile')->name('profile');
-//Route::get('/contact','staticController@Contact');
-//Route::resource('/About','articlesController',['only'=>['about']]);
-//Route::get('/About','articlesController@about')->name('About');
-
-
+Route::resource('comments','CommentsController');
 
