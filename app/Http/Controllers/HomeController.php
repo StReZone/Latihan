@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class HomeController extends Controller
 {
     /**
@@ -21,8 +22,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        if ($request->user()->hasRole('manager')){
+            return redirect('manager')->with('status','Login sukses !!');
+        } elseif ($request->user()->hasRole('employee')) {
+            return redirect('employee')->with('status','Login sukses !!');
+        }
+            return view('home');
     }
+        
+    
 }
