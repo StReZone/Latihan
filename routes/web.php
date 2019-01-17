@@ -15,7 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('root');
 Route::resource('articles','articlesController');
-//Route::get('/Home','staticController@Home');
 Route::get('/profile','staticController@Profile')->name('profile');
+Route::get('/articles','articlesController@index')->name('articles.index')->middleware('auth');
 Route::resource('comments','CommentsController');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
