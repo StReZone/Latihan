@@ -41,7 +41,12 @@ class articlesController extends Controller
     public function store(ArticleRequest $request)
     {
         //
-        Article::create($request->all());
+        if(Article::create($request->all())){
+            Session::flash("notice","Article success created");
+        } else {
+            Session::flash("notice","Article failed created");
+        }
+        
         Session::flash("notice","Article success created");
         return redirect()->route("articles.index");
        
@@ -57,8 +62,9 @@ class articlesController extends Controller
     {
         //
         $article = Article::find($id);
-        $comments =Article::find($id)->comments->sortBy('Comment.created_at');
-        return view("articles.show")->with('article',$article)->with('comments',$comments);
+        // $comments =Article::find($id)->comments->sortBy('Comment.created_at');
+        return view("articles.show")->with('article',$article);
+        // ->with('comments',$comments);
     }
 
     /**

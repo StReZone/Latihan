@@ -39,32 +39,43 @@
     </div>
     </div>
     <div class="col-md-6">
-    @foreach($comments as $k => $comment) 
-    @if ( $k % 2 == 0)
+        @foreach($article->comments()->get() as $k => $comment) 
         
-            <div class="bs-callout bs-callout-danger">
-                <p class="text-left">-{!! $comment->user !!}</p>
-            </div> 
-            @else
-            <div class="bs-callout bs-callout-info">
-                <p class="text-right">{!! $comment->user !!}-</p>
-            </div> 
-            @endif       
             @if ( $k % 2 == 0)
-            <div class="bs-callout bs-callout-danger">
-                <p class="text-left">{!! $comment->content !!}</p>
-            </div>
-            @else
-            <div class="bs-callout bs-callout-info">
-                <p class="text-right">{!! $comment->content !!}</p>
-            </div>
-            @endif      
-    @endforeach
+                <div class="bs-callout bs-callout-danger">
+                    <div class="row"> 
+                        <p class="text-left">-{!! $comment->user !!}</p>
+                    </div>
+                </div> 
+                @else
+                <div class="bs-callout bs-callout-info">
+                    <div class="row"> 
+                        <p class="text-right">{!! $comment->user !!}-</p>
+                    </div>
+                </div> 
+            @endif 
+                
+           
+            @if ( $k % 2 == 0)
+                <div class="bs-callout bs-callout-danger">
+                    <div class="row"> 
+                        <p class="text-left">{!! $comment->content !!}</p>
+                    </div>
+                </div>
+                @else
+                <div class="bs-callout bs-callout-info">
+                    <div class="row"> 
+                        <p class="text-right">{!! $comment->content !!}</p>
+                    </div>
+                </div>
+            @endif  
+              
+
+        @endforeach
     </div>
-
-    @stop 
+    
 </div>
-
+@stop 
         
 
 
