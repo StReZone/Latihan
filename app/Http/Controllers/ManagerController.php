@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Article;
+use Session;
 class ManagerController extends Controller
 {
     /**
@@ -14,6 +15,8 @@ class ManagerController extends Controller
     public function index()
     {
         //
+        $articles = Article::all();
+        return view('articles.index')->with('articles',$articles);   
     }
 
     /**

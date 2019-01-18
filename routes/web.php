@@ -23,7 +23,10 @@ Route::resource('comments','CommentsController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::group(['middleware' => 'auth'], function() {
-    Route::get('Manager','ManagerController@index');
-    Route::get('Employee','EmployeeController@index');
+Route::group(['middleware' => ['auth','role:manager'] ], function() {
+    Route::resource('manager','ManagerController');
+});
+Route::group(['middleware' => ['auth','role:employee']], function() {
+    Route::resource('employee','EmployeeController');
+
 });

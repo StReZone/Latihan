@@ -1,7 +1,8 @@
 @extends("template.template")
 
 @section("content")
-
+    {!! link_to(route("articles.create"),"Create",["class"=>"pull-right btn btn-raised btn--primary"])!!}
+</div>
 <article class="row">
     <h2>{!! $article->title !!}</h2>
     <div>{!! $article->content !!}</div>
