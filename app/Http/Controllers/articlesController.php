@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\Article;
 use Session;
 use App\Http\Requests\ArticleRequest;
@@ -13,11 +14,22 @@ class articlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $request)
+    {   
+        $action=Input::get('action','none');
+        if($action=='find'){
+            $search = $request->cari;
+            $hasil = Article::where('title', 'LIKE', '%' . $search . '%')->paginate(3);
+        }
+        
+
         $articles = Article::paginate(3);
         return view('articles.index')->with('articles',$articles);   
+    }
+    public function search(ArticleRequest $request)
+    {
+        
+        
     }
     
 
@@ -108,4 +120,5 @@ class articlesController extends Controller
         Session::flash("notice","Article success deleted");
         return redirect()->route("articles.index");
     }
+    
 }

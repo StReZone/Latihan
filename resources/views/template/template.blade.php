@@ -11,23 +11,39 @@
 <body style="padding-top:30px;">
 @include('komponen.navbar');
 <section>
-<div class="container clearfix">
-     
-        <div id="main-content" class="col-xs-12 col-sm-12">
-        <div class="panel-body">
-        @if (Session::has('error'))
-            <div class="alert alert-danger">
-                {{Session::get('error')}}
+<div class="container clearfix">   
+    <div id="main-content" class="col-xs-12 col-sm-12">
+    <div class="panel-body">
+    @if (Session::has('error'))
+        <div class="alert alert-danger">
+            {{Session::get('error')}}
+        </div>
+    @endif
+    @if (Session::has('notice'))
+        <div class="alert alert-info">
+            {{Session::get('notice')}}
+        </div>
+    @endif
+    <div class="row">
+        <div class="form-group label-floating">
+        <form action="{{ url('articles') }}" method="GET">
+            <label class="col-md-2"> Search Article</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="cari" value="" id="action" placeholder="Type Search Keywords">
             </div>
-        @endif
-        @if (Session::has('notice'))
-            <div class="alert alert-info">
-                {{Session::get('notice')}}
+            <div class="col-md-2">
+                <button id="search" class="btn btn-info btn-flat" name ="find" value= "action" type="submit"> Search </button>
             </div>
-        @endif
+        </div>
+    </form>
+    </div>
+    <br/>
+    <p> Sort article by : <a id="id">ID &nbsp;<i id="ic-direction"></i></a></p>
+    <br/>
+    <div id="data-content">
         @yield('content')
-
-    
+    </div>
+    <div id="direction" type="hidden" value="asc">    
 </div>
 
     </section>
@@ -35,7 +51,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{asset('boots/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript">
+    var path = "{{ url('search') }}";
+    $('#search').typeahead({
+         minLength: 2,
+        source:  function (query, process) {
+        return $.get(path, { query: query }, function (data) {
+                return process(data);
+            });
+        }
+    });
+</script>
+
+
 </body>
-<!-- <script src="{{asset('js/Mypic.js')}}"></script> -->
+
 
 </html>

@@ -28,5 +28,7 @@ Route::group(['middleware' => ['auth','role:manager'] ], function() {
 });
 Route::group(['middleware' => ['auth','role:employee']], function() {
     Route::resource('employee','EmployeeController');
+    //Route::get('/search','articlesController@search');
+    //Route::get('/search','articlesController@index');
 
 });
