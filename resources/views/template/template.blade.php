@@ -25,50 +25,109 @@
         </div>
     @endif
     <div class="row">
-        <div class="form-group label-floating">
+        <!-- <div class="form-group label-floating"> -->
         <form action="{{ url('articles') }}" method="GET">
             <label class="col-md-2"> Search Article</label>
             <div class="col-md-4">
                 <input type="text" class="form-control" name="cari" value="" id="cari" placeholder="Type Search Keywords">
+                <input id="sorting" type="hidden" value="desc"/>
             </div>
             <div class="col-md-2 ">
-                <button id="search" class="btn btn-info btn-flat" name ="action" value= "find" type="submit"> Search </button>
+                <button id="search" class="btn btn-info btn-flat" name ="action" value= "find" type="button"> Search </button>
             </div>
             <div class="col-md-4 col-md-push-2">
-                <button id="oldest" class="btn btn-info btn-flat" name ="action" value= "oldest" type="submit"> oldest </button>
-                <button id="newest" class="btn btn-info btn-flat" name ="action" value= "newest" type="submit"> newest </button>
+                <button  class="sort btn btn-info btn-flat" name ="action" value="desc" type="button"> oldest </button>
+                <button  class="sort btn btn-info btn-flat" name ="action" value="asc" type="button"> newest </button> 
             </div>
-        </div>
-    </form>
+        </form>
+    <!-- </div> -->  
     </div>
-    <br/>
-    <p> Sort article by : <a id="id">ID &nbsp;<i id="ic-direction"></i></a></p>
     <br/>
     <div id="data-content">
         @yield('content')
     </div>
-    <div id="direction" type="hidden" value="asc">    
+    
 </div>
-
-    </section>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{asset('boots/js/bootstrap.min.js')}}"></script>
-    <script type="text/javascript">
-    var path = "{{ url('search') }}";
-    $('#search').typeahead({
-         minLength: 2,
-        source:  function (query, process) {
-        return $.get(path, { query: query }, function (data) {
-                return process(data);
-            });
-        }
+</section>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{asset('boots/js/bootstrap.min.js')}}"></script>
+<!-- script hadle for pagination -->
+<script>
+    $(document).ready(function(){
+        $(document).on('click',' .pagination a', function(e) {
+            get_page($(this).attr('href').split('page=')[1]);
+            e.preventDefault();
+        })
+    }) 
+    function get_page(page) {
+        $.ajax({
+            url :'/articles?page=' + page,
+            type : 'GET',
+            dataType : 'json',
+            data : {
+                'cari' : $('#cari').val()
+                
+            },
+            success : function(data) {
+                $('#data-content').html(data['view']);
+            },
+            error : function (xhr, status, error) {
+                console.log(xhr.error + "\n ERROR STATUS : " + status + "\n" + error);
+            },
+            complete : function() {
+                alreadyloading = false;
+            }
+        }) ; 
+    }
+</script>
+<!-- Script for handle Ajax Search -->
+<script>
+    $('#search').on('click',function() {
+        $.ajax({
+            url : '/articles',
+            type: 'GET',
+            dataType : 'json',
+            data : {
+                'cari' : $('#cari').val()
+            },
+            success : function(data) {
+                $('#data-content').html(data['view']);
+            },
+                error : function(xhr, status) {
+                    console.log(xhr.error + " ERROR STATUS : " + status);
+                },
+                complete :function() {
+                    alreadyloading=false; 
+                }
+        });
     });
 </script>
-
-
+<!-- Script for handle ajax shorting-->
+<script>
+    $('.sort').on('click',function() {
+        var btn = $(this).val();
+        //alert(btn);
+        $.ajax({
+            url : '/articles',
+            type: 'GET',
+            dataType : 'json',
+            data : {
+                'sort' : btn
+            },
+            success : function(data) {
+                $('#data-content').html(data['view']);
+            },
+                error : function(xhr, status) {
+                    console.log(xhr.error + " ERROR STATUS : " + status);
+                },
+                complete :function() {
+                    alreadyloading=false; 
+                }
+        });
+    });
+    
+</script>
 </body>
-
-
 </html>

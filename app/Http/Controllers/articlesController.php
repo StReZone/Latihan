@@ -18,19 +18,24 @@ class articlesController extends Controller
     {   
      
         $action=Input::get('action','none');
-        if($action=='find'){
-            $search = $request->cari;
-            $articles = Article::where('title', 'LIKE', '%' . $search . '%')->paginate(3);
-            return view('articles.index')->with('articles',$articles);  
-        }elseif($action=='newest') {
+        if ($request->ajax()) {
+            $articles = Article::where('title', 'LIKE', '%' . $request->cari . '%');
+            if($request->sort == "asc"){
+                $articles = $articles->orderBy('created_at',$request->sort)->paginate(3);
+                $view =(String) view('articles.list')->with('articles',$articles)->render();
+                return response()->json(['view' => $view,'status' => 'success']);
+            }elseif($request->sort == "desc"){
+                $articles = $articles->orderBy('created_at',$request->sort)->paginate(3);
+                $view =(String) view('articles.list')->with('articles',$articles)->render();
+                return response()->json(['view' => $view,'status' => 'success']);
+            }
+            $articles = $articles->paginate(3);
+            $view =(String) view('articles.list')->with('articles',$articles)->render();
+            return response()->json(['view' => $view,'status' => 'success']);
+        }else{
             $articles = Article::paginate(3);
             return view('articles.index')->with('articles',$articles);   
-        }elseif($action=='oldest') {
-            $articles = Article::orderBy('created_at','desc')->paginate(3);
-            return view('articles.index')->with('articles',$articles);   
-        }
-        $articles = Article::paginate(3);
-        return view('articles.index')->with('articles',$articles);   
+        }  
     }
     
     

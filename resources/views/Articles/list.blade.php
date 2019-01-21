@@ -7,8 +7,9 @@
     </p>
 </article>
 @endforeach
+
 <div class="row"> 
     <div class="col-md-6 col-md-offset-4"> 
-        {!! $articles->render()!!}
+        {!! $articles->links()!!}
     </div>  
 </div>
