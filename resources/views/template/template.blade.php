@@ -28,11 +28,15 @@
         <div class="form-group label-floating">
         <form action="{{ url('articles') }}" method="GET">
             <label class="col-md-2"> Search Article</label>
-            <div class="col-md-8">
-                <input type="text" class="form-control" name="cari" value="" id="action" placeholder="Type Search Keywords">
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="cari" value="" id="cari" placeholder="Type Search Keywords">
             </div>
-            <div class="col-md-2">
-                <button id="search" class="btn btn-info btn-flat" name ="find" value= "action" type="submit"> Search </button>
+            <div class="col-md-2 ">
+                <button id="search" class="btn btn-info btn-flat" name ="action" value= "find" type="submit"> Search </button>
+            </div>
+            <div class="col-md-4 col-md-push-2">
+                <button id="oldest" class="btn btn-info btn-flat" name ="action" value= "oldest" type="submit"> oldest </button>
+                <button id="newest" class="btn btn-info btn-flat" name ="action" value= "newest" type="submit"> newest </button>
             </div>
         </div>
     </form>

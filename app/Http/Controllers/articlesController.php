@@ -16,21 +16,23 @@ class articlesController extends Controller
      */
     public function index(Request $request)
     {   
+     
         $action=Input::get('action','none');
         if($action=='find'){
             $search = $request->cari;
-            $hasil = Article::where('title', 'LIKE', '%' . $search . '%')->paginate(3);
+            $articles = Article::where('title', 'LIKE', '%' . $search . '%')->paginate(3);
+            return view('articles.index')->with('articles',$articles);  
+        }elseif($action=='newest') {
+            $articles = Article::paginate(3);
+            return view('articles.index')->with('articles',$articles);   
+        }elseif($action=='oldest') {
+            $articles = Article::orderBy('created_at','desc')->paginate(3);
+            return view('articles.index')->with('articles',$articles);   
         }
-        
-
         $articles = Article::paginate(3);
         return view('articles.index')->with('articles',$articles);   
     }
-    public function search(ArticleRequest $request)
-    {
-        
-        
-    }
+    
     
 
     /**
