@@ -7,6 +7,7 @@
                 <li>{!! link_to(route('root'), "Home") !!}</li>
                 <li>{!! link_to(route('profile'), "Profile") !!}</li>
                 <li>{!! link_to(route('articles.index'), "Article") !!}</li>
+                <li>{!! link_to(route('tablearticles.index'), "Table Article") !!}</li>
                 @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
