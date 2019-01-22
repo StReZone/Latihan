@@ -2,6 +2,10 @@
 
 @section("content")
 <div class="row">
+    <button class="add-modal btn btn-success" >Add a Post </button>
+</div>
+<br/>
+<div class="row">
     <table class="table table-striped table-bordered table-hover" id="postTable" style="">
                         <thead>
                             <tr>
