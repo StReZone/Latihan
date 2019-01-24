@@ -11,15 +11,25 @@ class Article extends Model
     protected $fillable = [
         'title','content'
     ];
-    public static function valid() {
+    public static function valid() 
+    {
         return array(
             'content' => 'required'
         );
     }
-    public function comments(){
+
+    public function comments()
+    {
         return $this->hasMany('App\Comment','article_id');
     }
-    public static function getExcerpt($str, $startPos = 0, $maxLength = 50) {
+
+    public function ImgUplode()
+    {
+        return $this->hasMany('App\ImgUplode','article_id');
+    }
+
+    public static function getExcerpt($str, $startPos = 0, $maxLength = 50) 
+    {
         if(strlen($str) > $maxLength) {
             $excerpt   = substr($str, $startPos, $maxLength - 6);
             $lastSpace = strrpos($excerpt, ' ');

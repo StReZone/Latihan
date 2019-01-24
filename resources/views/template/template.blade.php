@@ -24,30 +24,32 @@
             {{Session::get('notice')}}
         </div>
     @endif
+    @if(Request::path() == 'articles')
     <div class="row">
-        <!-- <div class="form-group label-floating"> -->
-        <form action="{{ url('articles') }}" method="GET">
-            <label class="col-md-2"> Search Article</label>
-            <div class="col-md-4">
-                <input type="text" class="form-control" name="cari" value="" id="cari" placeholder="Type Search Keywords">
-                <input id="sorting" type="hidden" value="desc"/>
-            </div>
-            <div class="col-md-2 ">
-                <button id="search" class="btn btn-info btn-flat" name ="action" value= "find" type="button"> Search </button>
-            </div>
-            <div class="col-md-4 col-md-push-2">
-                <button  class="sort btn btn-info btn-flat" name ="action" value="desc" type="button"> oldest </button>
-                <button  class="sort btn btn-info btn-flat" name ="action" value="asc" type="button"> newest </button> 
-            </div>
-        </form>
-    <!-- </div> -->  
-    </div>
+    <!-- <div class="form-group label-floating"> -->
+    <form action="{{ url('articles') }}" method="GET">
+        <label class="col-md-2"> Search Article</label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="cari" value="" id="cari" placeholder="Type Search Keywords">
+            <input id="sorting" type="hidden" value="desc"/>
+        </div>
+        <div class="col-md-2 ">
+            <button id="search" class="btn btn-info btn-flat" name ="action" value= "find" type="button"> Search </button>
+        </div>
+        <div class="col-md-4 col-md-push-2">
+            <button  class="sort btn btn-info btn-flat" name ="action" value="desc" type="button"> newest </button>
+            <button  class="sort btn btn-info btn-flat" name ="action" value="asc" type="button"> oldest </button> 
+        </div>
+    </form>
+<!-- </div> -->  
+</div>
+    @endif
     <br/>
     <div id="data-content">
         @yield('content')
     </div>
     
-</div>
+
 </section>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

@@ -27,7 +27,8 @@ class ArticleRequest extends FormRequest
         return [
             //
             'title' => 'required|unique:articles,title|max:255',
-            'content' => 'required|unique:articles,content|min:50'
+            'content' => 'required|unique:articles,content|min:50',
+            'userfile' => 'required|image|mimes:jpeg,png|min:1|max:250'
         ];
     }
     public function messages(){

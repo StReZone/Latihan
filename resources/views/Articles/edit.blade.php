@@ -2,7 +2,7 @@
 
 @section("content")
     <h3>Edit Article</h3>
-    {!! Form::model($article, ['route' => ['articles.update', $article->id], 'method' => 'put', 'class' => 'form-horizontal', 'role' => 'form']) !!}
+    {!! Form::model($article, ['route' => ['articles.update', $article->id], 'method' => 'put', 'class' => 'form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
     @include('articles.form')
     {!! Form::close() !!}
 @stop

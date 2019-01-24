@@ -1,8 +1,9 @@
 @extends("template.tableview")
 
 @section("content")
+
 <div class="row">
-    <button class="add-modal btn btn-success" >Add a Post </button>
+    <button class="add-modal btn btn-success" >Add a Article </button>
 </div>
 <br/>
 <div class="row">

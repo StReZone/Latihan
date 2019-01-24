@@ -1,13 +1,19 @@
 @extends("template.template")
 
 @section("content")
-    {!! link_to(route("articles.create"),"Create",["class"=>"pull-right btn btn-raised btn--primary"])!!}
-</div>
 <article class="row">
     <h2>{!! $article->title !!}</h2>
     <div>{!! $article->content !!}</div>
     <i>By {!! $article->author !!}</i>
 </article>
+<div class="row">
+    @foreach($img as $image) 
+    <div class="col-md-3">
+        <img src="{!! asset($image->file) !!}" class="img-responsive">
+    </div>
+    @endforeach
+</div>
+   
 <div class="row">
     <div class="col-md-6">
     <h3><i><u>Give Comments</u></i></h3>
